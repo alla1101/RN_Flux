@@ -9,6 +9,18 @@ class cmain extends React.Component {
     this.state={
       tally:TallyStore.getTally()
     };
+    this.updateState = this.updateState.bind(this);
+  }
+  componentDidMount(){
+    TallyStore.addChangeListener(this.updateState);
+  }
+  componentWillUnmount(){
+    TallyStore.removeChangeListener(this.updateState);
+  }
+  updateState(){
+    this.setState({
+      tally:TallyStore.getTally()
+    });
   }
   render() {
     return (
@@ -17,7 +29,7 @@ class cmain extends React.Component {
         Countly
         </Text>
         <Text style={styles.tally}>
-        Tally: 0
+        Tally: {this.state.tally.count}
         </Text>
         <TouchableOpacity style={styles.button} onPress={increment}>
           <Text style={styles.buttonText}>
