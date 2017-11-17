@@ -1,2 +1,3 @@
-import cmain from './src/cmain';
+import cmain from './srcRedux/cmain';
+
 export default cmain;
